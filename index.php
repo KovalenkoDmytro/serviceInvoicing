@@ -50,6 +50,16 @@
 
 </form>
 
+<?php
+
+interface TableGoogs{
+    public function addGood();
+    public function removeGood();
+    public function createPDF();
+}
+
+?>
+
 
 
 
