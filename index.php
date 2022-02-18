@@ -3,42 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>InvoicesConfigurator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        table{
+            caption-side: top;
+        }
+    </style>
 </head>
 <body>
-<form action="progressingForm.php" method="post" class="wrapper">
-    <label for="date">Data wystawienia</label>
-    <input type="date" name="date" id="date" required>
-
-    <label for="documentNumber">Numer</label>
-    <input type="text" name="documentNumber" id="documentNumber" required>
-
-    <label for="seller">Sprzedawca</label>
-    <input type="text" name="seller" id="seller">
-
-    <label for="sellerTaxId">NIP</label>
-    <input type="text" name="sellerTaxId" id="sellerTaxId">
-
-    <label for="street">Ulica</label>
-    <input type="text" name="street" id="street">
-
-    <label for="city">Miasto </label>
-    <input type="text" name="city" id="city">
-
-    <label for="customer">Nabywca</label>
-    <input type="text" name="customer" id="customer">
-
-    <label for="customerTaxId">NIP</label>
-    <input type="text" name="customerTaxId" id="customerTaxId">
-
-    <label for="customerStreet">Ulica</label>
-    <input type="text" name="customerStreet" id="customerStreet">
-
-    <label for="customerCity">Miasto</label>
-    <input type="text" name="customerCity" id="customerCity">
-
-
-
-        <table class="goodsWrapper" style="border: 1px solid gray">
+<form action="progressingForm.php" method="post" class="d-flex  flex-wrap flex-column container-lg mt-5">
+    <table class="col-3" style="border: 1px solid gray">
+        <thead>
+        <tr>
+            <th style="background: #a09aa5; padding: 5px">Data wystawienia</th>
+            <th style="background: #a09aa5; padding: 5px">Numer dokumentu</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="date" name="date" id="date" required></td>
+            <td><input type="text" name="documentNumber" id="documentNumber" required></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="col-6" style="border: 1px solid gray">
+        <caption>Sprzedawca</caption>
+        <thead>
+        <tr>
+            <th style="background: #a09aa5; padding: 5px">Nazwa</th>
+            <th style="background: #a09aa5; padding: 5px">NIP</th>
+            <th style="background: #a09aa5; padding: 5px">Ulica</th>
+            <th style="background: #a09aa5; padding: 5px">Miasto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" name="seller" id="seller"></td>
+            <td><input type="text" name="sellerTaxId" id="sellerTaxId"></td>
+            <td><input type="text" name="street" id="street"></td>
+            <td><input type="text" name="city" id="city"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="col-6" style="border: 1px solid gray">
+        <caption>Nabywca</caption>
+        <thead>
+        <tr>
+            <th style="background: #a09aa5; padding: 5px">Nazwa</th>
+            <th style="background: #a09aa5; padding: 5px">NIP</th>
+            <th style="background: #a09aa5; padding: 5px">Ulica</th>
+            <th style="background: #a09aa5; padding: 5px">Miasto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" name="customer" id="customer"></td>
+            <td><input type="text" name="customerTaxId" id="customerTaxId"></td>
+            <td><input type="text" name="customerStreet" id="customerStreet"></td>
+            <td><input type="text" name="customerCity" id="customerCity"></td>
+        </tr>
+        </tbody>
+    </table>
+    <table class="col-4 mb-3 goodsWrapper"  style="border: 1px solid gray">
+            <caption>Towary</caption>
             <thead>
                 <tr>
                     <th style="background: #a09aa5; padding: 5px">#</th>
@@ -53,17 +80,50 @@
                     <td><input id="productPrice" name="product-price_1"></td>
                 </tr>
             </tbody>
-            </table>
+        </table>
 
-    <button id="addProduct">Dodać produkt/Uslugę</button>
 
     <div class="buttons">
-        <a href="Table.php" title="invoicesList">Lista wystawionych faktur</a>
-        <button type="submit">Wystawić fakturę</button>
-        <a id="createInvoice" href="Document.php" title="invoices">FakturaVAT</a>
+        <button class="btn btn-warning" id="addProduct">Dodać produkt/Uslugę</button>
+        <a class="btn btn-primary" href="Table.php" title="invoicesList">Lista wystawionych faktur</a>
+        <button class="btn btn-success" type="submit">Wystawić fakturę</button>
     </div>
 
 
+
+
+
+
+    <!---->
+    <!--    <label for="date">Data wystawienia</label>-->
+    <!--    <input type="date" name="date" id="date" required>-->
+
+    <!--    <label for="documentNumber">Numer</label>-->
+    <!--    <input type="text" name="documentNumber" id="documentNumber" required>-->
+
+    <!--    <label for="seller">Sprzedawca</label>-->
+    <!--    <input type="text" name="seller" id="seller">-->
+    <!---->
+    <!--    <label for="sellerTaxId">NIP</label>-->
+    <!--    <input type="text" name="sellerTaxId" id="sellerTaxId">-->
+    <!---->
+    <!--    <label for="street">Ulica</label>-->
+    <!--    <input type="text" name="street" id="street">-->
+    <!---->
+    <!--    <label for="city">Miasto </label>-->
+    <!--    <input type="text" name="city" id="city">-->
+
+    <!--    <label for="customer">Nabywca</label>-->
+    <!--    <input type="text" name="customer" id="customer">-->
+    <!---->
+    <!--    <label for="customerTaxId">NIP</label>-->
+    <!--    <input type="text" name="customerTaxId" id="customerTaxId">-->
+    <!---->
+    <!--    <label for="customerStreet">Ulica</label>-->
+    <!--    <input type="text" name="customerStreet" id="customerStreet">-->
+    <!---->
+    <!--    <label for="customerCity">Miasto</label>-->
+    <!--    <input type="text" name="customerCity" id="customerCity">-->
 
 </form>
 
@@ -106,11 +166,15 @@
         const inputPrice = document.querySelectorAll('#productPrice');
 
 
-        for (let i = 1; i < goodsInputs.length+1; i++) {
+        for (let i = 0; i < goodsInputs.length; i++) {
             goodsInputs[i].setAttribute('name',`product-name_${i+1}`);
             inputPrice[i].setAttribute('name',`product-price_${i+1}`);
             productsNumber[i].textContent = i+1;
         }
+
+
+
+
     }
 </script>
 

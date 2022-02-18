@@ -27,11 +27,14 @@ class Table
 
     public function showTable()
     {
-        $fileContent = file_get_contents('dataBase.txt');
-        $invoices = json_decode($fileContent);
-        $this->invoices = $invoices;
+        if (file_exists('dataBase.txt')){
+            $fileContent = file_get_contents('dataBase.txt');
+            $invoices = json_decode($fileContent);
+            $this->invoices = $invoices;
+        }
 
-        if (filesize('dataBase.txt') > 2) {
+
+        if (file_exists('dataBase.txt') && filesize('dataBase.txt') > 2) {
             ?>
             <table class="countDoc" style="border: 1px solid gray">
                 <thead>
