@@ -60,7 +60,7 @@
     <div class="buttons">
         <a href="Table.php" title="invoicesList">Lista wystawionych faktur</a>
         <button type="submit">Wystawić fakturę</button>
-        <a id="createInvoice" href="invoise.php" title="invoices">FakturaVAT</a>
+        <a id="createInvoice" href="Document.php" title="invoices">FakturaVAT</a>
     </div>
 
 

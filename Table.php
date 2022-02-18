@@ -31,7 +31,7 @@ class Table
         $invoices = json_decode($fileContent);
         $this->invoices = $invoices;
 
-        if (filesize('dataBase.txt') > 0) {
+        if (filesize('dataBase.txt') > 2) {
             ?>
             <table class="countDoc" style="border: 1px solid gray">
                 <thead>
@@ -54,7 +54,7 @@ class Table
                                     <td>{$invoice->documentNumber}</td>
                                     <td>{$invoice->customer}</td>
                                     <td style='text-align: center'><a href='{$_SERVER['PHP_SELF']}?remove=invoice&remove={$invoice->documentNumber}' >Usunąc</a></td>
-                                     <td><a href='invoise.php?invoice=download&docNum={$invoice->documentNumber}'>Pobrać</a></td>
+                                     <td><a href='Document.php?invoice=download&docNum={$invoice->documentNumber}'>Pobrać</a></td>
                                  </tr>";
                     $i++;
                 }
