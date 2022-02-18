@@ -1,13 +1,14 @@
 <?php
 
 
-class Table{
+class Table
+{
 
-    private array $invoices = [];
+    private $invoices;
 
     private function createEmptyTable()
- {
-     echo '<table class="countDoc" style="border: 1px solid gray">
+    {
+        echo '<table class="countDoc" style="border: 1px solid gray">
             <thead>
                 <tr>
                     <th style="background: #a09aa5; padding: 5px">#</th>
@@ -22,11 +23,16 @@ class Table{
                 </tr>
             </tbody>
         </table>';
- }
+    }
 
-    public function showTable(){
-        if ($_COOKIE['Invoices'] !== null) {
-            $this->invoices = json_decode($_COOKIE['Invoices'], true); ?>
+    public function showTable()
+    {
+        $fileContent = file_get_contents('dataBase.txt');
+        $invoices = json_decode($fileContent);
+        $this->invoices = $invoices;
+
+        if (filesize('dataBase.txt') > 0) {
+            ?>
             <table class="countDoc" style="border: 1px solid gray">
                 <thead>
                 <tr>
@@ -35,53 +41,53 @@ class Table{
                     <th style="background: #a09aa5; padding: 5px">Numer dokumentu</th>
                     <th style="background: #a09aa5; padding: 5px">Nabywca</th>
                     <th style="background: #a09aa5; padding: 5px">Usuwanie dokumenta</th>
+                    <th style="background: #a09aa5; padding: 5px">FakturaVAT</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                        $i = 1;
-                        foreach ($this->invoices as $invoice) {
-                            echo "<tr>
+                $i = 1;
+                foreach ($this->invoices as $invoice) {
+                    echo "<tr>
                                     <td>$i</td>
-                                    <td>{$invoice['date']}</td>
-                                    <td>{$invoice['documentNumber']}</td>
-                                    <td>{$invoice['customer']}</td>
-                                    <td style='text-align: center'><a href='{$_SERVER['PHP_SELF']}?remove=invoice&remove={$invoice['documentNumber']}' >Usunąc</a></td>
+                                    <td>{$invoice->date}</td>
+                                    <td>{$invoice->documentNumber}</td>
+                                    <td>{$invoice->customer}</td>
+                                    <td style='text-align: center'><a href='{$_SERVER['PHP_SELF']}?remove=invoice&remove={$invoice->documentNumber}' >Usunąc</a></td>
+                                     <td><a href='invoise.php?invoice=download&docNum={$invoice->documentNumber}'>Pobrać</a></td>
                                  </tr>";
-                            $i++;
-                        }
-                        ?>
+                    $i++;
+                }
+                ?>
                 </tbody>
             </table>
-        <?php
+            <a href="index.php" title="newInvoice">Wystawic nową fakturę</a>
+            <?php
         } else {
             $this->createEmptyTable();
         }
+
     }
 
-    public function refreshInvoicesInDB(string $documentNumber){
-        if(count($this->invoices)>0) {
-            // remove
+    public function refreshInvoicesInDB(string $documentNumber)
+    {
+        if (count($this->invoices) > 0) {
+
             for ($i = 0; $i <= count($this->invoices) - 1; $i++) {
-                if ($this->invoices[$i]['documentNumber'] === $documentNumber) {
+                if ($this->invoices[$i]->documentNumber === $documentNumber) {
                     unset($this->invoices[$i]);
                 }
             }
-            $newInvoices = array_values($this->invoices);
-            //add new
-            setCookie("Invoices","");
-            if(count($newInvoices)>0){
-                setCookie("Invoices",json_encode($newInvoices));
-            }
+            $file = fopen('dataBase.txt', 'w+');
+            $newDataBase = json_encode($this->invoices);
+            fwrite($file, $newDataBase);
         }
     }
+
 }
-
-
 
 $newTable = new Table();
 $newTable->showTable();
-
 
 
 if (isset($_GET['remove'])) {

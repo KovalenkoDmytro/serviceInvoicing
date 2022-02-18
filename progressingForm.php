@@ -1,23 +1,36 @@
 <?php
 
-
-function addInvoiceToDB($invoice)
+function addInvoiceToDB($invoice, $fileName)
 {
-    if (($_COOKIE['Invoices'] !== null) && (count($invoice) !== 0)) {
-        $result = json_decode($_COOKIE['Invoices'], true);
-        array_push($result, $invoice);
-        setcookie('Invoices', json_encode($result));
-    } else {
-        $invoices = [];
-        array_push($invoices, $invoice);
-        setcookie('Invoices', json_encode($invoices));
+    if(filesize($fileName)>0){
+        $firstProduct = file_get_contents($fileName);
+        var_dump($firstProduct);
+        $updateGoods =json_decode($firstProduct);
+        $object = (object) $invoice;
+        array_push($updateGoods,$object);
+        $strInvoices = json_encode($updateGoods);
+        $file = fopen($fileName,'w');
+        fwrite($file,$strInvoices);
+        echo 'second';
+    }else{
+        $file = fopen($fileName,'w');
+        $goods = [];
+        array_push($goods,$invoice);
+        $strInvoice = json_encode($goods);
+        fwrite($file,$strInvoice);
+        echo 'first';
     }
 }
 
 
+
 if (isset($_POST)) {
-    addInvoiceToDB($_POST);
+    addInvoiceToDB($_POST,'dataBase.txt');
     Header("Location: index.php");
-    var_dump(($_POST));
     exit;
 }
+
+
+
+
+
